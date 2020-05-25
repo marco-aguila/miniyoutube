@@ -20,3 +20,9 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+//controlador de videos
+Route::get('crear-video', array(
+    'as' => 'createVideo',
+    'middleware' => 'auth',
+    'uses' => 'VideoController@create_video'
+))->name('crear-video');
