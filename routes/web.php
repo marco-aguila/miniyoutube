@@ -20,9 +20,16 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-//controlador de videos
+
+//controladores de videos
 Route::get('crear-video', array(
     'as' => 'createVideo',
     'middleware' => 'auth',
-    'uses' => 'VideoController@create_video'
-))->name('crear-video');
+    'uses' => 'VideoController@createVideo'
+));
+
+Route::post('guardar-video', array(
+    'as' => 'saveVideo',
+    'middleware' => 'auth',
+    'uses' => 'VideoController@saveVideo'
+));
