@@ -51,7 +51,7 @@ class VideoController extends Controller
         $video->save();
 
         return redirect()->route('home')->with(array(
-            'message' => 'El video se a subido Correctamente;'
+            'message' => 'El video se a subido Correctamente! XD'
         ));
     }
 }
