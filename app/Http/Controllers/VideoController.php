@@ -20,22 +20,34 @@ class VideoController extends Controller
     
     public function saveVideo(Request $request)
     {
-        //validar formulario
+        //validar formulario con los datos que se suber a la BD
         $validateData = $this->validate($request,[
             'title' => 'required|min:5',
             'description'=> 'required',
             'video' => 'mimes:mp4'
         ]);
 
-        $video = new Video();
-        $user = \Auth::user();
-        $video->user_id= $user->id;
-        $video->title = $request->input('title');
+        $video = new Video();//crea un nuevo modelo 
+        $user = \Auth::user();//verificar que el usuario este logeado
+        $video->user_id= $user->id;//relacion de llave foranea para asignarle un video a un usuario
+        $video->title = $request->input('title');//obtener la informacion y guardarle en las variables correspondientes
         $video->description = $request->input('description');
-        $video->status = $request->input('status');
-        $video->image = $request->input('image');
-
-
+        //subida de imagen 
+        $image = $request->file('image');
+        if($image)
+        {
+            $image_path = time().$image->getClientOriginalName();
+            \Storage::disk('images')->put($image_path, \File::get($image));
+            $video->image = $image_path;
+        }
+        //subida del video
+        $video_file = $request->file('image');
+        if($video_file)
+        {
+            $video_path = time().$video_file->getClientOriginalName();
+            \Storage::disk('videos')->put($video_path, \File::get($video_file));
+            $video->video_path = $video_path;
+        }
         $video->save();
 
         return redirect()->route('home')->with(array(
