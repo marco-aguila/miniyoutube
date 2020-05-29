@@ -40,3 +40,7 @@ Route::get('video/{video_id}',array(
     'as' => 'detailVideo',
     'uses' => 'VideoController@obtenerVideoDetail'
 ));
+Route::get('/video-file/{filename}',array(
+    'as' => 'fileVideo',
+    'uses' => 'videoController@obtenerVideo'
+));

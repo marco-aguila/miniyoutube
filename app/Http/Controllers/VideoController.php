@@ -43,7 +43,7 @@ class VideoController extends Controller
             $video->image = $image_path;
         }
         //subida del video
-        $video_file = $request->file('image');
+        $video_file = $request->file('video');
         if($video_file)
         {
             $video_path = time().$video_file->getClientOriginalName();
@@ -63,6 +63,12 @@ class VideoController extends Controller
         return new Response($file, 200);
     }
 
+    public function obtenerVideo($filename)
+    {
+        $file = Storage::disk('videos')->get($filename);
+        return new Response($file, 200);
+    }
+
     public function obtenerVideoDetail($video_id)
     {
         $video = Video::find($video_id);
@@ -71,4 +77,5 @@ class VideoController extends Controller
             'video' => $video
         ));
     }
+
 }

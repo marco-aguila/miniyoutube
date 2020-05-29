@@ -1,6 +1,7 @@
 body{
     /* #c4302b color HEX youtube*/
-    background-color: #e1e1e1;
+    /*background-image: url("/public/fondo.jpg");*/
+    background-color: cornflowerblue;
 }
 #video-list .panel-body{
     padding-left: 0px;
