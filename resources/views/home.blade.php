@@ -25,10 +25,11 @@
                         @endif
                         <div class="data">
                             <h2 class="video-title">
-                               <a href="">{{ $video->title }}</a> 
+                               <a href="{{ route('detailVideo',['video_id' => $video->id]) }}">{{ $video->title }}</a>
+                            </h2>
                                 <p>Subido por:{{ $video->user->name.' '.$video->user->surname }}</p>
                                 <p> </p>
-                            </h2>
+                            
                     </div>
                     <a href="" class="btn btn-info">Ver Video</a>
 
