@@ -2,35 +2,46 @@
 
 @section('content')
 <div class="container">
-    <div class="row justify-content-center">
-        <div class="card-body">
-            @if (session('message'))
-                <div class="alert alert-success" role="alert">
-                    {{ session('message') }}
-                </div>
-            @endif   
+   
+        @if (session('message'))
+            <div class="alert alert-success" role="alert">
+                {{ session('message') }}
+            </div>
+        @endif   
             
-            <ul id="videos-list">
+            <div id="videos-list">
+                
                 @foreach ($videos as $video)
-                    <li class="video-item col-md-4 pull-left">
+                <div class="video-item col-md-10 pull-left panel panel-default">
+                    <div class="card" style="margin-bottom: 15px; padding:10px">
+                    <div class="panel-body">
                         <!--Image of video-->
                         @if (Storage::disk('images')->has($video->image))
-                        <div class="video-image-thumb">
-                            <div class="col-md-6 col-md-offset-3">
-                                <img style="max-width: 100%;" src="{{ url('miniatura/'.$video->image) }}" alt="{{ $video->description }}">
-                            </div>
+                        <div class="video-image-thumb col-md-3 pull-left">
+                                <div class="video-image-mask">
+                                    <img class="video-image"  src="{{ url('miniatura/'.$video->image) }}" alt="{{ $video->description }}">
+                                </div>
                         </div>
                         @endif
                         <div class="data">
-                            <h4>
-                                {{ $video->title }}
-                            </h4>
-                        </div>
+                            <h2 class="video-title">
+                               <a href="">{{ $video->title }}</a> 
+                                <p>Subido por:{{ $video->user->name.' '.$video->user->surname }}</p>
+                                <p> </p>
+                            </h2>
+                    </div>
+                    <a href="" class="btn btn-info">Ver Video</a>
+
+                    @if (Auth::check() && Auth::user()->id == $video->user->id)
+                        <a href="" class="btn btn-warning" >Editar</a>
+                        <a href="" class="btn btn-danger">Eliminar</a>
+                    @endif
                         <!--Botones de Acciones-->
-                    </li>
+                    </div>
+                    </div>
+                 </div>
                 @endforeach
-            </ul>        
-        </div>
+            </div>           
     {{ $videos->links() }}
 </div>
 @endsection
