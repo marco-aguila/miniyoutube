@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests;
+
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Symfony\Component\HttpFoundation\Response;
+
 use App\Video;
 use App\Comment;
 
@@ -53,5 +55,11 @@ class VideoController extends Controller
         return redirect()->route('home')->with(array(
             'message' => 'El video se a subido Correctamente! XD'
         ));
+    }
+
+    public function obtenerImagen($filename)
+    {
+        $file = Storage::disk('images')->get($filename);
+        return new Response($file, 200);
     }
 }
