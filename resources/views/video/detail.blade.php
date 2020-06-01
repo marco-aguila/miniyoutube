@@ -12,7 +12,19 @@
                   Your browser does not support the video tag.
                 </video>
                 <!--DESCRIPTION-->
+                <div class="panel panel-default video-data">
+                    <div class="panel-heading">
 
+                        <div class="panel-title">
+                            Subido por  <strong>{{ $video->user->name.' '.$video->user->surname }}</strong>
+                            el {{ $video->created_at }}
+                        </div>
+
+                    </div>
+                    <div class="panel-body">
+                        {{ $video->description }}
+                    </div>
+                </div>
                 <!--COMENTS-->
 
             </div>
