@@ -72,3 +72,9 @@ Route::get('/delete-comment/{comment_id}',array(
     'uses' => 'CommentController@delete'
 ));
 
+
+//BUSCAR
+Route::get('buscar/{search?}',[
+    'as' => 'videoSearch',
+    'uses' => 'VideoController@search'
+]);

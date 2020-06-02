@@ -10,7 +10,8 @@
         @endif   
             
             <div id="videos-list">
-                
+                @if (count($videos) >= 1)
+        
                 @foreach ($videos as $video)
                 <div class="video-item col-md-10 pull-left panel panel-default">
                     <div class="card" style="margin-bottom: 15px; padding:10px">
@@ -65,6 +66,12 @@
                     </div>
                  </div>
                 @endforeach
+                @else
+                    <div class="alert alert-warning">
+                        LO SENTIMOS NO HAY VIDEOS :(
+                    </div>
+                @endif
+
             </div>           
     {{ $videos->links() }}
 </div>

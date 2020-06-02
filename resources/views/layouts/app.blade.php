@@ -32,7 +32,7 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
-                <form action="" class="navbar-form navbar-left" role="search">
+                <form action="{{ url('/buscar') }}" class="navbar-form navbar-left" role="search">
                     <div class="form-group">
                         <input type="text" class="form-control" placeholder="Que quieres Ver?" name="search">
                     </div>
