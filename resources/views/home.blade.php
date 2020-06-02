@@ -23,6 +23,7 @@
                                 </div>
                         </div>
                         @endif
+                        
                         <div class="data">
                             <h2 class="video-title">
                                <a href="{{ route('detailVideo',['video_id' => $video->id]) }}">{{ $video->title }}</a>
@@ -34,7 +35,7 @@
                     <a href="{{ route('detailVideo',['video_id' => $video->id]) }}" class="btn btn-info">Ver Video</a>
 
                     @if (Auth::check() && Auth::user()->id == $video->user->id)
-                        <a href="" class="btn btn-warning" >Editar</a>
+                        <a href="{{ route('editVideo',['video_id' => $video->id]) }}" class="btn btn-warning" >Editar</a>
                        
                        <!-- Botón en HTML (lanza el modal en Bootstrap) -->
                            <a href="#marcoModal{{ $video->id }}" role="button" class="btn btn-sm btn-danger" data-toggle="modal">Eliminar</a>
