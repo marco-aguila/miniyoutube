@@ -44,6 +44,11 @@ Route::get('/video-file/{filename}',array(
     'as' => 'fileVideo',
     'uses' => 'videoController@obtenerVideo'
 ));
+Route::get('/delete-video/{video_id}', array(
+    'as' => 'videoDelete',
+    'middleware' => 'auth',
+    'uses' => 'VideoController@delete'
+));
 //COMMENTS
 Route::post('/comment',array(
     'as' => 'comment',
