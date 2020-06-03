@@ -169,6 +169,8 @@ class VideoController extends Controller
     {   
         if(is_null($search)){
             $search = \Request::get('search');
+
+            return redirect()->route('videoSearch' , array('search' => $search));
         }
         $videos = Video::where('title','LIKE','%'.$search.'%')->paginate(5);//buscar y sacar los videos que CONTENGAN alguna relacion con la busqueda
        
