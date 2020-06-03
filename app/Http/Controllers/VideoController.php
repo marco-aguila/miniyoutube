@@ -165,15 +165,41 @@ class VideoController extends Controller
           return redirect()->route('home')->with(array('message' => 'El video se a ACTUALIZADO Correctamente!' ));
     }
 
-    public function search($search = null)
+    public function search($search = null, $filter = null)
     {   
         if(is_null($search)){
             $search = \Request::get('search');
-
             return redirect()->route('videoSearch' , array('search' => $search));
         }
-        $videos = Video::where('title','LIKE','%'.$search.'%')->paginate(5);//buscar y sacar los videos que CONTENGAN alguna relacion con la busqueda
-       
+
+        if(is_null($filter) && \Request::get('filter') && !is_null($search)){
+            $filter = \Request::get('filter');
+            return redirect()->route('videoSearch' , array('search' => $search, 'filter' => $filter));
+        }
+        //filtros para la busqueda
+        $colum = 'id';
+        $order = 'desc';
+
+        if(!is_null($filter)){
+            if($filter=='new'){
+                $colum = 'id';
+                $order = 'desc';
+            }
+            if($filter == 'old'){
+                $colum = 'id';
+                $order = 'asc';
+            }
+
+            if($filter == 'alfa'){
+                 $colum = 'title';
+                 $order = 'asc';
+            }
+        }
+
+        $videos = Video::where('title','LIKE','%'.$search.'%')
+            ->orderBy($colum,$order)
+            ->paginate(5);//buscar y sacar los videos que CONTENGAN alguna relacion con la busqueda
+   
         return view('video.search',array(
             'videos' => $videos,
             'search' => $search      

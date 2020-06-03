@@ -74,7 +74,13 @@ Route::get('/delete-comment/{comment_id}',array(
 
 
 //BUSCAR
-Route::get('buscar/{search?}',[
+Route::get('buscar/{search?}/{filter?}',[
     'as' => 'videoSearch',
     'uses' => 'VideoController@search'
 ]);
+
+
+//BORRAR CACHE
+Route::get('/clear-cache', function(){
+    $code = Artisan::call('cache:clear');
+});
