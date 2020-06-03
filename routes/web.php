@@ -76,7 +76,11 @@ Route::get('buscar/{search?}/{filter?}',[
     'as' => 'videoSearch',
     'uses' => 'VideoController@search'
 ]);
-
+//USUARIO
+Route::get('/canal/{user_id}', array(
+    'as' => 'channel',
+    'uses' => 'UserController@channel'
+));
 
 //BORRAR CACHE
 Route::get('/clear-cache', function(){
